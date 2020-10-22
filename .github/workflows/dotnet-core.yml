@@ -1,30 +1,41 @@
 name: Build and Deploy DotNet project to Azure Function App
 
-env:
-  AZURE_FUNCTIONAPP_NAME: ImageProcessor           # set this to your application's name
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: './ImageProcessor'              # set this to the path to your web app project, defaults to the repository root
-  # DOTNET_VERSION: '3.1.301'                        # set this to the dotnet version to use
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
+env:
+  AZURE_FUNCTIONAPP_NAME: ImageProcessor           # set this to your application's name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './ImageProcessor'              # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.1.301'                        # set this to the dotnet version to use
+
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: windows-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
+
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
+
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
     - name: Install dependencies
-      run: dotnet restore './ImageProcessor'
+      run: dotnet restore
+
     - name: Build
-      run: dotnet build --configuration Release --no-restore --source 'D:\a\CleanHorseProcessImage\CleanHorseProcessImage\ImageProcessor\ImageProcessor.csproj '
-    # - name: Test
-    #   run: dotnet test --no-restore --verbosity normal
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+
+    - name: 'Resolve Project Dependencies Using Dotnet'
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build --configuration Release --output ./output
+        popd
