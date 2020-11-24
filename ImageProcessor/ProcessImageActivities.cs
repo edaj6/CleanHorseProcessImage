@@ -17,8 +17,8 @@ namespace ImageProcessor
             log.LogInformation($"Validating {input}");
             
             // simulate doing the activity
-            await Task.Delay(5000);
-            return "validimagelocation.jpg";
+            await Task.Delay(1000);
+            return input;
         }
 
         [FunctionName("ActivityResize")]
@@ -27,8 +27,8 @@ namespace ImageProcessor
             log.LogInformation($"ResizeImage {input}");
 
             // simulate doing the activity
-            await Task.Delay(5000);
-            return "validimagelocation.jpg";
+            await Task.Delay(1000);
+            return input;
         }
 
         [FunctionName("ActivityCreateThumbnail")]
@@ -37,8 +37,8 @@ namespace ImageProcessor
             log.LogInformation($"CreateThumbnail {input}");
 
             // simulate doing the activity
-            await Task.Delay(5000);
-            return "validimagelocation.jpg";
+            await Task.Delay(1000);
+            return "thumb" + input;
         }
 
         [FunctionName("ActivitySendMail")]
@@ -47,7 +47,7 @@ namespace ImageProcessor
             log.LogInformation($"SendMail {input}");
 
             // simulate doing the activity
-            await Task.Delay(5000);
+            await Task.Delay(1000);
             return true;
         }
     }

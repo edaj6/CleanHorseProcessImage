@@ -51,7 +51,7 @@ namespace ImageProcessor
             if (!ctx.IsReplaying)
                 log.LogInformation("About to call send mail");
 
-            var isMailMail = await
+            var isMailSend = await
                 ctx.CallActivityAsync<bool>("ActivitySendMail", resizedImageLocation);
 
             return new
@@ -59,7 +59,7 @@ namespace ImageProcessor
                 Status = "Succes",
                 Transcoded = resizedImageLocation,
                 Thumbnail = thumbnailLocation,
-                MailSend = isMailMail
+                MailSend = isMailSend
             };
 
         }
