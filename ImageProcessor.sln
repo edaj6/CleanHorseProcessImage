@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessor", "ImageProcessor.csproj", "{01BB6B4C-9CEA-48C0-90FE-D43ED098A460}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessor", "ImageProcessor\ImageProcessor.csproj", "{01BB6B4C-9CEA-48C0-90FE-D43ED098A460}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
